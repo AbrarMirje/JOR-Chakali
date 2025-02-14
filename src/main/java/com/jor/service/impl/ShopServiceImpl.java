@@ -74,18 +74,19 @@ public class ShopServiceImpl implements ShopService {
         Shop shop = shopRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Shop not found with id " + id));
 
-        // Unlink all products associated with this shop
+        if (shop.getBucket() != null) {
+            shop.getBucket().setShop(null);
+            shop.setBucket(null);
+        }
+
         if (shop.getProducts() != null && !shop.getProducts().isEmpty()) {
             shop.getProducts().forEach(product -> product.setShop(null));
         }
 
-        // Remove shop reference from location
         shop.setLocation(null);
 
-        // Save changes before deleting shop
         shopRepository.save(shop);
 
-        // Now delete the shop safely
         shopRepository.deleteById(id);
         return true;
     }

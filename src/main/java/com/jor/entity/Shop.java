@@ -34,4 +34,8 @@ public class Shop {
     private List<Product> products;
 
 
+    @OneToOne(orphanRemoval = true)
+    @JoinColumn(name = "bucket_id")
+    @JsonManagedReference
+    private Bucket bucket;
 }

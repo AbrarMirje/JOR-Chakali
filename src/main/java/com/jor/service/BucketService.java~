@@ -1,0 +1,2 @@
+package com.jor.service;public interface BucketService {
+}
