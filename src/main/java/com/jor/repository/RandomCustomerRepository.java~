@@ -1,0 +1,11 @@
+package com.jor.repository;
+
+import com.jor.entity.RandomCustomer;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface RandomCustomerRepository extends JpaRepository<RandomCustomer, Long> {
+
+
+}

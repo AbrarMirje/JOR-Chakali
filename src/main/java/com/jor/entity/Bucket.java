@@ -4,16 +4,15 @@ package com.jor.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.jor.entity.Shop;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.IdGeneratorType;
 
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Setter
+@Getter
 @Entity
 public class Bucket {
     @Id
@@ -24,4 +23,5 @@ public class Bucket {
     @JsonBackReference
     private Shop shop;
 
+    private Integer quantity;
 }

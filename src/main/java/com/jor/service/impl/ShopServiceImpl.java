@@ -37,13 +37,12 @@ public class ShopServiceImpl implements ShopService {
             List<Product> managedProducts = shop.getProducts().stream()
                     .map(product -> {
                         if (product.getProductId() != null) {
-                            // Fetch product from DB to ensure it's managed
                             Product existingProduct = productRepository.findById(product.getProductId())
                                     .orElseThrow(() -> new RuntimeException("Product not found with id " + product.getProductId()));
-                            existingProduct.setShop(shop);  // 🔥 Set shop reference explicitly
+                            existingProduct.setShop(shop);  // Set shop reference explicitly
                             return existingProduct;
                         }
-                        product.setShop(shop);  // 🔥 Ensure new products also reference the shop
+                        product.setShop(shop);  //  Ensure new products also reference the shop
                         return product;
                     })
                     .toList();

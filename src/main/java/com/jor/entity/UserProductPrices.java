@@ -1,26 +1,30 @@
 package com.jor.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @Entity
-public class Locations {
+public class UserProductPrices {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long locationId;
+    private Long id;
 
-    private String locationName;
-
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonManagedReference
-    @JsonIgnore
-    private List<Shop> shops;
+    @JoinColumn(name = "shop_id")
+    private Shop shop;
+
+    @ManyToOne
+    @JsonManagedReference
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    private Double customPrice;
+
 }

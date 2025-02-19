@@ -2,14 +2,14 @@ package com.jor.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
-@Data
+@Setter
+@Getter
 @Entity
 @NoArgsConstructor
 public class Product {
@@ -28,4 +28,10 @@ public class Product {
     @JoinColumn(name = "shop_id")
     @JsonBackReference
     private Shop shop;
+
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<UserProductPrices> userProductPrices;
+
 }

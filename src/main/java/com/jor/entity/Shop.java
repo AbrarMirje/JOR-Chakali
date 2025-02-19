@@ -1,18 +1,16 @@
 package com.jor.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Setter
+@Getter
 @Entity
 public class Shop {
     @Id
@@ -38,4 +36,9 @@ public class Shop {
     @JoinColumn(name = "bucket_id")
     @JsonManagedReference
     private Bucket bucket;
+
+
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<UserProductPrices> userProductPrices;
 }
